@@ -7,30 +7,22 @@ import { fetchMoviesByName } from '../api';
 
 export const Movies = ({ query }) => {
   const [movies, setMovies] = useState([]);
-  // const [query, setQuery] = useState;
   const [searchParams, setSearchParams] = useSearchParams();
   const movieName = searchParams.get('query') ?? '';
   const location = useLocation();
-
-  // const visibileMovies = movies.filter(movie =>
-  //   movie.name.toLowerCase().includes(movieName.toLowerCase())
-  // );
 
   const updateQueryString = query => {
     const nextParams = query !== '' ? { query } : {};
     setSearchParams(nextParams);
     console.log('nextParams, ', nextParams);
   };
-  console.log('movieName, ', movieName);
   console.log('query, ', query);
-  console.log('searchParams, ', searchParams);
-  console.log('movies, ', movies);
+  console.log('query: movieName, ', { query: movieName });
 
   useEffect(() => {
     if (!movieName) return;
     const getMovies = async () => {
-      // const { movies } = await fetchMoviesByName({ query });
-      const movies = await fetchMoviesByName({ movieName });
+      const movies = await fetchMoviesByName({ query: movieName });
       console.log('movies, ', movies);
       setMovies(movies);
     };
