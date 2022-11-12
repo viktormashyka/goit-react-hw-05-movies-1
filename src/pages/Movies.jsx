@@ -12,7 +12,6 @@ export const Movies = ({ query }) => {
   const movieName = searchParams.get('query') ?? '';
   const location = useLocation();
 
-  console.log('movieName, ', movieName);
   // const visibileMovies = movies.filter(movie =>
   //   movie.name.toLowerCase().includes(movieName.toLowerCase())
   // );
@@ -20,20 +19,27 @@ export const Movies = ({ query }) => {
   const updateQueryString = query => {
     const nextParams = query !== '' ? { query } : {};
     setSearchParams(nextParams);
+    console.log('nextParams, ', nextParams);
   };
+  console.log('movieName, ', movieName);
+  console.log('query, ', query);
+  console.log('searchParams, ', searchParams);
+  console.log('movies, ', movies);
 
   useEffect(() => {
+    if (!movieName) return;
     const getMovies = async () => {
-      const { movies } = await fetchMoviesByName({ query });
+      // const { movies } = await fetchMoviesByName({ query });
+      const movies = await fetchMoviesByName({ movieName });
       console.log('movies, ', movies);
       setMovies(movies);
     };
     getMovies();
-  }, [query]);
+  }, [movieName]);
 
   return (
     <main>
-      <SearchBox value="movieName" onChange={updateQueryString} />
+      <SearchBox value={movieName} onChange={updateQueryString} />
       <h1>Movies by name:</h1>
       <ul>
         {movies.map(movie => (
@@ -47,43 +53,6 @@ export const Movies = ({ query }) => {
     </main>
   );
 };
-
-// export const Movies = () => {
-//   return (
-//     <main>
-//       <h1>Movies</h1>
-//       <img src="https://via.placeholder.com/960x240" alt="" />
-//       <p>
-//         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto,
-//         laboriosam placeat incidunt rem illum animi nemo quibusdam quia
-//         voluptatum voluptate.
-//       </p>
-//     </main>
-//   );
-// };
-
-// export const Movies = async () => {
-//   const movies = await fetchMoviesByName({ query });
-//   console.log('movies, ', movies);
-// const [searchParams, setSearchParams] = useSearchParams();
-// const movieName = searchParams.get('name') ?? '';
-
-// const visibleMovies = movies.filter(movie =>
-//   movie.name.toLowerCase().includes(movieName.toLowerCase())
-// );
-
-// const updateQueryString = name => {
-//   const nextParams = name !== '' ? { name } : {};
-//   setSearchParams(nextParams);
-// };
-
-// return (
-//   <main>
-//     <SearchBox value={movieName} onChange={updateQueryString} />
-//     {/* <MoviesList movies={visibleMovies} /> */}
-//   </main>
-// );
-// };
 
 // import { useSearchParams } from 'react-router-dom';
 // import { ProductList } from '../components/ProductList';
@@ -108,17 +77,6 @@ export const Movies = ({ query }) => {
 //     <main>
 //       <SearchBox value={productName} onChange={updateQueryString} />
 //       <ProductList products={visibleProducts} />
-//     </main>
-//   );
-// };
-
-// import { getProducts } from "../fakeAPI";
-
-// export const Products = () => {
-//   const products = getProducts();
-//   return (
-//     <main>
-//       <ProductList products={products} />
 //     </main>
 //   );
 // };

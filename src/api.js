@@ -1,8 +1,6 @@
 import axios from 'axios';
 // import PropTypes from 'prop-types';
 
-// example url = 'https://api.themoviedb.org/3/movie/550?api_key=857288c3c5f42347171bc7541b9a4b57'
-// https://api.themoviedb.org/3/search/movie?api_key=857288c3c5f42347171bc7541b9a4b57&language=en-US&page=1&include_adult=false&query=
 const BASE_URL = 'https://api.themoviedb.org/';
 const API_KEY = '857288c3c5f42347171bc7541b9a4b57';
 
@@ -12,7 +10,6 @@ export const fetchMoviesTrendingToday = async () => {
     const response = await axios.get(url);
     console.log('response.data.results, ', response.data.results);
     const movies = getNormalizedMovies(response.data.results);
-    // const pages = Math.ceil(response.data.totalHits / per_page);
     return movies;
   } catch (error) {
     throw new Error(error);
@@ -25,7 +22,6 @@ export const fetchMoviesByName = async ({ query }) => {
     const response = await axios.get(url);
     console.log('response.data.results, ', response.data.results);
     const movies = getNormalizedMovies(response.data.results);
-    // const pages = Math.ceil(response.data.totalHits / per_page);
     return movies;
   } catch (error) {
     throw new Error(error);

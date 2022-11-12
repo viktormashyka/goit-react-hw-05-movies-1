@@ -9,9 +9,8 @@ export const Home = () => {
   useEffect(() => {
     const getMovies = async () => {
       const movies = await fetchMoviesTrendingToday();
-      console.log('movies before setMovies, ', movies);
+      console.log('movies, ', movies);
       setMovies(movies);
-      console.log('movies after setMovies, ', movies);
     };
     getMovies();
   }, []);
