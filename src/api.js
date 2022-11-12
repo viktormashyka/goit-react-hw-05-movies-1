@@ -1,38 +1,52 @@
 import axios from 'axios';
 // import PropTypes from 'prop-types';
 
-// const BASE_URL = 'https://pixabay.com/api/';
 // example url = 'https://api.themoviedb.org/3/movie/550?api_key=857288c3c5f42347171bc7541b9a4b57'
 // https://api.themoviedb.org/3/search/movie?api_key=857288c3c5f42347171bc7541b9a4b57&language=en-US&page=1&include_adult=false&query=
 const BASE_URL = 'https://api.themoviedb.org/';
 const API_KEY = '857288c3c5f42347171bc7541b9a4b57';
 
-export const fetchMovies = async ({ query }) => {
-  // const per_page = 12;
-
-  //   const url = `${BASE_URL}3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${query}`;
-  const url = `${BASE_URL}3/trending/movie/day?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${query}`;
+export const fetchMoviesTrendingToday = async () => {
+  const url = `${BASE_URL}3/trending/movie/day?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
   try {
     const response = await axios.get(url);
-
-    // const movies = getNormalizedMovies(response.data.hits);
+    console.log('response.data.results, ', response.data.results);
+    const movies = getNormalizedMovies(response.data.results);
     // const pages = Math.ceil(response.data.totalHits / per_page);
-
-    // return { movies };
-    return response;
+    return movies;
   } catch (error) {
     throw new Error(error);
-    console.error(error);
   }
 };
 
-// const getNormalizedMovies = movies => {
-//   const normalizedData = movies.map(
-//     ({ id, tags, webformatURL, largeImageURL }) => {
-//       return { id, tags, webformatURL, largeImageURL };
-//     }
-//   );
-//   return normalizedData;
+export const fetchMoviesByName = async ({ query }) => {
+  const url = `${BASE_URL}3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${query}`;
+  try {
+    const response = await axios.get(url);
+    console.log('response.data.results, ', response.data.results);
+    const movies = getNormalizedMovies(response.data.results);
+    // const pages = Math.ceil(response.data.totalHits / per_page);
+    return movies;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const getNormalizedMovies = movies => {
+  const normalizedData = movies.map(
+    ({ id, original_title, title, overview }) => {
+      return { id, original_title, title, overview };
+    }
+  );
+  return normalizedData;
+};
+
+// export const getMovieById = movieId => {
+//   return movies.find(movie => movie.id === movieId);
+// };
+
+// export const getProductById = productId => {
+//   return products.find(product => product.id === productId);
 // };
 
 // fetchPhotos.propTypes = {
