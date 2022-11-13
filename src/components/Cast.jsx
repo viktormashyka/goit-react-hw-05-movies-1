@@ -3,11 +3,10 @@ export const Cast = () => {
     <section>
       <div>
         <h2>Cast</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Non commodi
-          impedit provident laborum? Cumque facilis quam quidem qui delectus,
-          unde dolorem alias ea dicta vitae natus ipsam modi quia error!
-        </p>
+        {/* <img src={movie.poster_path} alt={movie.title} /> */}
+        <img src="https://via.placeholder.com/960x240" alt="" />
+        <p>actor name</p>
+        <p>actor character</p>
       </div>
     </section>
   );

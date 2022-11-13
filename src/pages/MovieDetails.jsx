@@ -2,12 +2,14 @@ import { useParams, useLocation } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { BackLink } from 'components/BackLink';
-import { fetchMovieById } from 'api';
+import { fetchMovieById, fetchMovieByIdCast, fetchMovieByIdReviews } from 'api';
 
 export const MovieDetails = () => {
   console.log('Run MovieDetails... ');
 
   const [movie, setMovie] = useState({});
+  const [cast, setCast] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
 
   console.log('MovieDetails movieId, ', movieId);
@@ -15,10 +17,28 @@ export const MovieDetails = () => {
   useEffect(() => {
     const getMovie = async () => {
       const movie = await fetchMovieById({ movieId });
-      console.log('MoviesDetails movie, ', movie);
+      console.log('MovieDetails movie, ', movie);
       setMovie(movie);
     };
     getMovie();
+  }, [movieId]);
+
+  useEffect(() => {
+    const getCast = async () => {
+      const cast = await fetchMovieByIdCast({ movieId });
+      console.log('MovieDetailsCast cast, ', cast);
+      setCast(cast);
+    };
+    getCast();
+  }, [movieId]);
+
+  useEffect(() => {
+    const getReviews = async () => {
+      const reviews = await fetchMovieByIdReviews({ movieId });
+      console.log('MovieDetailsReviews, ', reviews);
+      setReviews(reviews);
+    };
+    getReviews();
   }, [movieId]);
 
   const location = useLocation();
@@ -27,8 +47,8 @@ export const MovieDetails = () => {
   return (
     <main>
       <BackLink to={backLinkHref}>Back to movies</BackLink>
-      <img src="https://via.placeholder.com/960x240" alt="" />
-      <img src={movie.backdrop_path} alt={movie.title} />
+      {/* <img src="https://via.placeholder.com/960x240" alt="" /> */}
+      {/* <img src={movie.backdrop_path} alt={movie.title} /> */}
       <img src={movie.poster_path} alt={movie.title} />
       <div>
         {/* Product - {product.name} - {id} */}
@@ -39,16 +59,20 @@ export const MovieDetails = () => {
         <h3>Overview</h3>
         <p>{movie.overview}</p>
         <h3>Genres</h3>
-        <p>genres</p>
+        {/* <p>{movie.genres[name]}</p> */}
       </div>
       <div>
         <h3>Additional name</h3>
         <ul>
           <li>
-            <Link to="cast">Cast</Link>
+            <Link to="cast" cast={cast}>
+              Cast
+            </Link>
           </li>
           <li>
-            <Link to="reviews">Reviews</Link>
+            <Link to="reviews" reviews={reviews}>
+              Reviews
+            </Link>
           </li>
         </ul>
         <Outlet />
