@@ -2,24 +2,24 @@ import { useParams, useLocation } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { BackLink } from 'components/BackLink';
-import { fetchMoviesById } from 'api';
+import { fetchMovieById } from 'api';
 
 export const MovieDetails = () => {
   console.log('Run MovieDetails... ');
 
   const [movie, setMovie] = useState({});
-  const { id } = useParams();
+  const { movieId } = useParams();
 
-  console.log('MovieDetails id, ', id);
+  console.log('MovieDetails movieId, ', movieId);
 
   useEffect(() => {
     const getMovie = async () => {
-      const movie = await fetchMoviesById({ id });
+      const movie = await fetchMovieById({ movieId });
       console.log('MoviesDetails movie, ', movie);
       setMovie(movie);
     };
     getMovie();
-  }, [id]);
+  }, [movieId]);
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
@@ -28,11 +28,12 @@ export const MovieDetails = () => {
     <main>
       <BackLink to={backLinkHref}>Back to movies</BackLink>
       <img src="https://via.placeholder.com/960x240" alt="" />
+      <img src={movie.backdrop_path} alt={movie.title} />
       <img src={movie.poster_path} alt={movie.title} />
       <div>
         {/* Product - {product.name} - {id} */}
         <h2>
-          {movie.title} - {id}
+          {movie.title} - {movieId}
         </h2>
         <p>Score</p>
         <h3>Overview</h3>

@@ -14,7 +14,6 @@ export const Movies = ({ query }) => {
   const updateQueryString = query => {
     const nextParams = query !== '' ? { query } : {};
     setSearchParams(nextParams);
-    console.log('nextParams, ', nextParams);
   };
   console.log('query: movieName, ', { query: movieName });
 

@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+
 import { fetchMoviesTrendingToday } from 'api';
 
 export const Home = () => {

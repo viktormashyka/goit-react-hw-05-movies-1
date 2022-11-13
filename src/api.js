@@ -34,8 +34,9 @@ export const fetchMoviesByName = async ({ query }) => {
   }
 };
 
-export const fetchMoviesById = async ({ id }) => {
-  const url = `${BASE_URL}3/movie/${id}?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
+export const fetchMovieById = async ({ movieId }) => {
+  const url = `${BASE_URL}3/movie/${movieId}?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
+  //   const url = `${BASE_URL}3/movie/414906?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
   try {
     const response = await axios.get(url);
     console.log('fetchMoviesById response.data, ', response.data);
