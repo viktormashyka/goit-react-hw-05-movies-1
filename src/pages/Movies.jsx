@@ -16,14 +16,13 @@ export const Movies = ({ query }) => {
     setSearchParams(nextParams);
     console.log('nextParams, ', nextParams);
   };
-  console.log('query, ', query);
   console.log('query: movieName, ', { query: movieName });
 
   useEffect(() => {
     if (!movieName) return;
     const getMovies = async () => {
       const movies = await fetchMoviesByName({ query: movieName });
-      console.log('movies, ', movies);
+      console.log('Movies movies, ', movies);
       setMovies(movies);
     };
     getMovies();
@@ -34,10 +33,10 @@ export const Movies = ({ query }) => {
       <SearchBox value={movieName} onChange={updateQueryString} />
       <h1>Movies by name:</h1>
       <ul>
-        {movies.map(movie => (
-          <li key={movie.id}>
-            <Link to={`${movie.id}`} state={{ from: location }}>
-              <p>{movie.title}</p>
+        {movies.map(({ id, title }) => (
+          <li key={id}>
+            <Link to={`${id}`} state={{ from: location }}>
+              <p>{title}</p>
             </Link>
           </li>
         ))}

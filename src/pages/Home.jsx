@@ -9,7 +9,7 @@ export const Home = () => {
   useEffect(() => {
     const getMovies = async () => {
       const movies = await fetchMoviesTrendingToday();
-      console.log('movies, ', movies);
+      console.log('Home movies, ', movies);
       setMovies(movies);
     };
     getMovies();

@@ -8,7 +8,10 @@ export const fetchMoviesTrendingToday = async () => {
   const url = `${BASE_URL}3/trending/movie/day?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
   try {
     const response = await axios.get(url);
-    console.log('response.data.results, ', response.data.results);
+    console.log(
+      'fetchMoviesTrendingToday response.data.results, ',
+      response.data.results
+    );
     const movies = getNormalizedMovies(response.data.results);
     return movies;
   } catch (error) {
@@ -20,9 +23,25 @@ export const fetchMoviesByName = async ({ query }) => {
   const url = `${BASE_URL}3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${query}`;
   try {
     const response = await axios.get(url);
-    console.log('response.data.results, ', response.data.results);
+    console.log(
+      'fetchMoviesByName response.data.results, ',
+      response.data.results
+    );
     const movies = getNormalizedMovies(response.data.results);
     return movies;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const fetchMoviesById = async ({ id }) => {
+  const url = `${BASE_URL}3/movie/${id}?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
+  try {
+    const response = await axios.get(url);
+    console.log('fetchMoviesById response.data, ', response.data);
+    // const movie = getNormalizedMovies(response.data.results);
+    const movie = response.data;
+    return movie;
   } catch (error) {
     throw new Error(error);
   }
