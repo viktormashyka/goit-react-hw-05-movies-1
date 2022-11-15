@@ -53,24 +53,31 @@ export const MovieDetails = () => {
         <h2>
           {title} ({release_date})
         </h2>
-        <p>User Score: {vote_average}</p>
+        <p>User Score: {vote_average * 10}%</p>
         <h3>Overview</h3>
         <p>{overview}</p>
         <h3>Genres</h3>
         <p>genres</p>
-        {/* {for (const genre of genres) {Object.values(genre.name)}} */}
         {/* <p>{Object.values(movie.genres.name)}</p> */}
       </div>
       <div>
         <h3>Additional name</h3>
         <ul>
           <li>
-            <Link to="cast" cast={cast}>
+            <Link
+              to="cast"
+              cast={cast}
+              state={{ from: location.state?.from ?? '/' }}
+            >
               Cast
             </Link>
           </li>
           <li>
-            <Link to="reviews" reviews={reviews}>
+            <Link
+              to="reviews"
+              reviews={reviews}
+              state={{ from: location.state?.from ?? '/' }}
+            >
               Reviews
             </Link>
           </li>
