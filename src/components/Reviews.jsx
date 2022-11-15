@@ -1,5 +1,20 @@
-export const Reviews = ({ reviews }) => {
-  console.log('reviews, ', reviews);
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { fetchMovieByIdReviews } from 'api';
+
+export const Reviews = () => {
+  const [reviews, setReviews] = useState([]);
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    const getReviews = async () => {
+      const reviews = await fetchMovieByIdReviews({ movieId });
+      console.log('MovieDetailsReviews, ', reviews);
+      setReviews(reviews);
+    };
+    getReviews();
+  }, [movieId]);
+
   return (
     <section>
       <div>
@@ -16,18 +31,3 @@ export const Reviews = ({ reviews }) => {
     </section>
   );
 };
-
-// export const Reviews = () => {
-//   return (
-//     <section>
-//       <div>
-//         <h2>Author review</h2>
-//         <p>
-//           Lorem ipsum dolor sit amet consectetur adipisicing elit. Non commodi
-//           impedit provident laborum? Cumque facilis quam quidem qui delectus,
-//           unde dolorem alias ea dicta vitae natus ipsam modi quia error!
-//         </p>
-//       </div>
-//     </section>
-//   );
-// };
