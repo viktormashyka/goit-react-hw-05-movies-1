@@ -1,12 +1,18 @@
-export const Cast = () => {
+export const Cast = ({ cast }) => {
+  console.log('cast, ', cast);
   return (
     <section>
       <div>
         <h2>Cast</h2>
-        {/* <img src={movie.poster_path} alt={movie.title} /> */}
-        <img src="https://via.placeholder.com/960x240" alt="" />
-        <p>actor name</p>
-        <p>actor character</p>
+        <ul>
+          {cast.map(c => (
+            <li key={c.id}>
+              <img src={c.profile_path} alt={c.name} />
+              <p>{c.name}</p>
+              <p>Character: {c.character}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

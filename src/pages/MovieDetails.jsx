@@ -12,8 +12,6 @@ export const MovieDetails = () => {
   const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
 
-  console.log('MovieDetails movieId, ', movieId);
-
   useEffect(() => {
     const getMovie = async () => {
       const movie = await fetchMovieById({ movieId });
@@ -43,23 +41,25 @@ export const MovieDetails = () => {
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
-
+  const { title, poster_path, release_date, vote_average, overview } = movie;
   return (
     <main>
       <BackLink to={backLinkHref}>Back to movies</BackLink>
-      {/* <img src="https://via.placeholder.com/960x240" alt="" /> */}
-      {/* <img src={movie.backdrop_path} alt={movie.title} /> */}
-      <img src={movie.poster_path} alt={movie.title} />
+      <img src={poster_path} alt={title} />
       <div>
-        {/* Product - {product.name} - {id} */}
+        {/* <h2>
+          {movie.title} ({movie.release_date.slice(0, 4)})
+        </h2> */}
         <h2>
-          {movie.title} - {movieId}
+          {title} ({release_date})
         </h2>
-        <p>Score</p>
+        <p>User Score: {vote_average}</p>
         <h3>Overview</h3>
-        <p>{movie.overview}</p>
+        <p>{overview}</p>
         <h3>Genres</h3>
-        {/* <p>{movie.genres[name]}</p> */}
+        <p>genres</p>
+        {/* {for (const genre of genres) {Object.values(genre.name)}} */}
+        {/* <p>{Object.values(movie.genres.name)}</p> */}
       </div>
       <div>
         <h3>Additional name</h3>

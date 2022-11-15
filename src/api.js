@@ -36,8 +36,8 @@ export const fetchMoviesByName = async ({ query }) => {
 
 const getNormalizedMovies = movies => {
   const normalizedData = movies.map(
-    ({ id, original_title, title, overview }) => {
-      return { id, original_title, title, overview };
+    ({ id, original_title, title, overview, genre_ids }) => {
+      return { id, original_title, title, overview, genre_ids };
     }
   );
   return normalizedData;
@@ -45,7 +45,6 @@ const getNormalizedMovies = movies => {
 
 export const fetchMovieById = async ({ movieId }) => {
   const url = `${BASE_URL}3/movie/${movieId}?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
-  //   const url = `${BASE_URL}3/movie/414906?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
   try {
     const response = await axios.get(url);
     console.log('fetchMoviesById response.data, ', response.data);
@@ -59,14 +58,12 @@ export const fetchMovieById = async ({ movieId }) => {
 
 export const fetchMovieByIdCast = async ({ movieId }) => {
   const url = `${BASE_URL}3/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
-  //   const url = `${BASE_URL}3/movie/414906?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
-  //  https://api.themoviedb.org/3/movie/414906?api_key=857288c3c5f42347171bc7541b9a4b57&language=en-US&page=1&include_adult=false
   try {
     const response = await axios.get(url);
-    console.log('fetchMoviesById response.data.cast, ', response.data.cast);
+    console.log('fetchMovieByIdCast response.data.cast, ', response.data.cast);
     // const movie = getNormalizedMovies(response.data.results);
-    const movie = response.data.cast;
-    return movie;
+    const cast = response.data.cast;
+    return cast;
   } catch (error) {
     throw new Error(error);
   }
@@ -74,12 +71,10 @@ export const fetchMovieByIdCast = async ({ movieId }) => {
 
 export const fetchMovieByIdReviews = async ({ movieId }) => {
   const url = `${BASE_URL}3/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
-  //   const url = `${BASE_URL}3/movie/414906?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
-  // https://api.themoviedb.org/3/movie/414906?api_key=857288c3c5f42347171bc7541b9a4b57&language=en-US&page=1&include_adult=false
   try {
     const response = await axios.get(url);
     console.log(
-      'fetchMoviesById response.data.results, ',
+      'fetchMovieByIdReviews response.data.results, ',
       response.data.results
     );
     // const movie = getNormalizedMovies(response.data.results);
