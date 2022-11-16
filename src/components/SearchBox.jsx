@@ -13,6 +13,54 @@ export const SearchBox = ({ value, onChange }) => {
   );
 };
 
+// export const SearchBox = ({ value, onSubmit }) => {
+//   // const [inputValues, setInputValues] = useState({ name: '' });
+
+//   // const handleChange = evt => {
+//   //   const { name, value } = evt.target;
+//   //   setInputValues({ ...inputValues, [name]: value });
+//   // };
+//   // const handleSubmit = e => {
+//   //   e.preventDefault();
+//   //   onSubmit({ ...inputValues });
+//   // };
+//   // const handleSubmit = evt => {
+//   //   evt.preventDefault();
+//   //   onSubmit({ ...inputValues });
+
+//   //   setInputValues({ name: '', number: '' });
+//   // };
+
+//   const handleSubmit = evt => {
+//     evt.preventDefault();
+//     const form = evt.currentTarget;
+//     const query = form.elements.login.value;
+//     onSubmit({ query });
+//     form.reset();
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <label>
+//         <Wrapper>
+//           <Icon />
+//           <Input
+//             name="name"
+//             type="text"
+//             value={value}
+//             // onChange={e => onChange(e.target.value)}
+//           />
+//           <button type="submit">
+//             <Icon />
+//           </button>
+//         </Wrapper>
+//       </label>
+//     </form>
+//   );
+// };
+
+
+
 // export const Searchbar = ({ onSubmit }) => {
 //   const [searchPhotos, setSearchPhotos] = useState('');
 

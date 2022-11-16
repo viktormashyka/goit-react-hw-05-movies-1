@@ -18,8 +18,10 @@ const StyledLink = styled(NavLink)`
 export const App = () => {
   return (
     <div>
-      <nav>
-        <StyledLink to="/" end>
+      <nav
+        style={{ marginLeft: '50px', marginTop: '20px', marginBottom: '20px' }}
+      >
+        <StyledLink to="/" end style={{ marginRight: '20px' }}>
           Home
         </StyledLink>
         <StyledLink to="/movies">Movies</StyledLink>

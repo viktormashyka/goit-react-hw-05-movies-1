@@ -4,10 +4,10 @@ import axios from 'axios';
 const BASE_URL = 'https://api.themoviedb.org/';
 const API_KEY = '857288c3c5f42347171bc7541b9a4b57';
 
-export const fetchMoviesTrendingToday = async () => {
+export const fetchMoviesTrendingToday = async signal => {
   const url = `${BASE_URL}3/trending/movie/day?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, { signal: signal });
     console.log(
       'fetchMoviesTrendingToday response.data.results, ',
       response.data.results
@@ -15,9 +15,27 @@ export const fetchMoviesTrendingToday = async () => {
     const movies = getNormalizedMovies(response.data.results);
     return movies;
   } catch (error) {
+    if (axios.isCancel(error)) {
+      return [];
+    }
     throw new Error(error);
   }
 };
+
+// export const fetchMoviesTrendingToday = async () => {
+//   const url = `${BASE_URL}3/trending/movie/day?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`;
+//   try {
+//     const response = await axios.get(url);
+//     console.log(
+//       'fetchMoviesTrendingToday response.data.results, ',
+//       response.data.results
+//     );
+//     const movies = getNormalizedMovies(response.data.results);
+//     return movies;
+//   } catch (error) {
+//     throw new Error(error);
+//   }
+// };
 
 export const fetchMoviesByName = async ({ query }) => {
   const url = `${BASE_URL}3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${query}`;
@@ -36,8 +54,8 @@ export const fetchMoviesByName = async ({ query }) => {
 
 const getNormalizedMovies = movies => {
   const normalizedData = movies.map(
-    ({ id, original_title, title, overview, genre_ids }) => {
-      return { id, original_title, title, overview, genre_ids };
+    ({ id, original_title, title, overview, genres }) => {
+      return { id, original_title, title, overview, genres };
     }
   );
   return normalizedData;
@@ -136,23 +154,3 @@ export const fetchMovieByIdReviews = async ({ movieId }) => {
 // };
 
 //*** ***/
-const products = [
-  { id: 'h-1', name: 'Hoodie 1' },
-  { id: 'h-2', name: 'Hoodie 2' },
-  { id: 'h-3', name: 'Hoodie 3' },
-  { id: 's-1', name: 'Sneakers 1' },
-  { id: 's-2', name: 'Sneakers 2' },
-  { id: 's-3', name: 'Sneakers 3' },
-  { id: 's-4', name: 'Sneakers 4' },
-  { id: 'p-1', name: 'Pants 1' },
-  { id: 'p-2', name: 'Pants 2' },
-  { id: 'p-3', name: 'Pants 3' },
-];
-
-export const getProducts = () => {
-  return products;
-};
-
-export const getProductById = productId => {
-  return products.find(product => product.id === productId);
-};

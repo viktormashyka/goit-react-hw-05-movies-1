@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-// import { MoviesList } from '../components/MoviesList';
+
 import { SearchBox } from '../components/SearchBox';
 import { fetchMoviesByName } from '../api';
 
@@ -21,15 +21,15 @@ export const Movies = ({ query }) => {
     if (!movieName) return;
     const getMovies = async () => {
       const movies = await fetchMoviesByName({ query: movieName });
-      console.log('Movies movies, ', movies);
       setMovies(movies);
     };
     getMovies();
   }, [movieName]);
 
   return (
-    <main>
+    <main style={{ marginLeft: '30px' }}>
       <SearchBox value={movieName} onChange={updateQueryString} />
+      {/* <SearchBox value={movieName} onSubmit={values => console.log(values)} /> */}
       <h1>Movies by name:</h1>
       <ul>
         {movies.map(({ id, title }) => (

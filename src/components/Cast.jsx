@@ -9,7 +9,6 @@ export const Cast = () => {
   useEffect(() => {
     const getCast = async () => {
       const cast = await fetchMovieByIdCast({ movieId });
-      console.log('MovieDetailsCast cast, ', cast);
       setCast(cast);
     };
     getCast();

@@ -8,16 +8,33 @@ export const Home = () => {
   const location = useLocation();
 
   useEffect(() => {
+    const controller = new AbortController();
     const getMovies = async () => {
-      const movies = await fetchMoviesTrendingToday();
-      console.log('Home movies, ', movies);
-      setMovies(movies);
+      try {
+        const movies = await fetchMoviesTrendingToday(controller.signal);
+        setMovies(movies);
+      } catch (error) {
+        console.log('Something went wrong:(');
+      }
     };
     getMovies();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
+  // useEffect(() => {
+  //   const getMovies = async () => {
+  //     const movies = await fetchMoviesTrendingToday();
+  //     console.log('Home movies, ', movies);
+  //     setMovies(movies);
+  //   };
+  //   getMovies();
+  // }, []);
+
   return (
-    <main>
+    <main style={{ marginLeft: '30px' }}>
       <h1>Trending today:</h1>
       <ul>
         {movies.map(movie => (

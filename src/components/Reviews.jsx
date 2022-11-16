@@ -9,7 +9,6 @@ export const Reviews = () => {
   useEffect(() => {
     const getReviews = async () => {
       const reviews = await fetchMovieByIdReviews({ movieId });
-      console.log('MovieDetailsReviews, ', reviews);
       setReviews(reviews);
     };
     getReviews();
@@ -18,15 +17,18 @@ export const Reviews = () => {
   return (
     <section>
       <div>
-        <h2>Authors review</h2>
-        <ul>
-          {reviews.map(r => (
-            <li key={r.id}>
-              <p>Author: {r.author}</p>
-              <p>{r.content}</p>
-            </li>
-          ))}
-        </ul>
+        {reviews.length > 0 ? (
+          <ul>
+            {reviews.map(r => (
+              <li key={r.id}>
+                <p>Author: {r.author}</p>
+                <p>{r.content}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>We don't have any reviews for this movie.</p>
+        )}
       </div>
     </section>
   );

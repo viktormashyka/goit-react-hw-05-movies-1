@@ -5,46 +5,43 @@ import { BackLink } from 'components/BackLink';
 import { fetchMovieById } from 'api';
 
 export const MovieDetails = () => {
-  console.log('Run MovieDetails... ');
-
   const [movie, setMovie] = useState({});
-  // const [cast, setCast] = useState([]);
-  // const [reviews, setReviews] = useState([]);
+  // const [genreNames, setGenreNames] = useState([]);
   const { movieId } = useParams();
 
   useEffect(() => {
     const getMovie = async () => {
       const movie = await fetchMovieById({ movieId });
-      console.log('MovieDetails movie, ', movie);
       setMovie(movie);
     };
     getMovie();
   }, [movieId]);
 
-  // useEffect(() => {
-  //   const getCast = async () => {
-  //     const cast = await fetchMovieByIdCast({ movieId });
-  //     console.log('MovieDetailsCast cast, ', cast);
-  //     setCast(cast);
-  //   };
-  //   getCast();
-  // }, [movieId]);
-
-  // useEffect(() => {
-  //   const getReviews = async () => {
-  //     const reviews = await fetchMovieByIdReviews({ movieId });
-  //     console.log('MovieDetailsReviews, ', reviews);
-  //     setReviews(reviews);
-  //   };
-  //   getReviews();
-  // }, [movieId]);
-
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
-  const { title, poster_path, release_date, vote_average, overview } = movie;
+  const { title, poster_path, release_date, vote_average, overview, genres } =
+    movie;
   const strPoster = 'https://image.tmdb.org/t/p/w300';
+  // setGenreNames(genres);
+  // console.log('genres, ', genres);
+
+  //       const onGenreNames = genres =>
+  //       {
+  //         genres.map(genre => (
+  //           <span key={genre.id} style={{ marginRight: '10px' }}>
+  //             {genre.name}
+  //           </span>
+  //         ));
+  // };
+
+  // for (genre of movie.genres) {
+  //   const genreName = Object.values(genre.name);
+  // }
+
+  // console.log('genreName, ', genreName);
+
   return (
-    <main>
+    <main style={{ marginLeft: '30px' }}>
       <BackLink to={backLinkHref}>Back to movies</BackLink>
       <img src={strPoster + poster_path} alt={title} />
       <div>
@@ -58,27 +55,24 @@ export const MovieDetails = () => {
         <h3>Overview</h3>
         <p>{overview}</p>
         <h3>Genres</h3>
-        <p>genres</p>
-        {/* <p>{Object.values(movie.genres.name)}</p> */}
+        {/* <p>{genreNames}</p> */}
+
+        {/* {genres.map(genre => (
+          <span key={genre.id} style={{ marginRight: '10px' }}>
+            {genre.name}
+          </span>
+        ))} */}
       </div>
       <div>
         <h3>Additional name</h3>
         <ul>
           <li>
-            <Link
-              to="cast"
-              // cast={cast}
-              state={{ from: location.state?.from ?? '/' }}
-            >
+            <Link to="cast" state={{ from: location.state?.from ?? '/' }}>
               Cast
             </Link>
           </li>
           <li>
-            <Link
-              to="reviews"
-              // reviews={reviews}
-              state={{ from: location.state?.from ?? '/' }}
-            >
+            <Link to="reviews" state={{ from: location.state?.from ?? '/' }}>
               Reviews
             </Link>
           </li>
