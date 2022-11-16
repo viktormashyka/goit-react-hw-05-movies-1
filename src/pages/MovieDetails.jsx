@@ -45,9 +45,9 @@ export const MovieDetails = () => {
       <BackLink to={backLinkHref}>Back to movies</BackLink>
       <img src={strPoster + poster_path} alt={title} />
       <div>
-        {/* <h2>
+        <h2>
           {movie.title} ({movie.release_date.slice(0, 4)})
-        </h2> */}
+        </h2>
         <h2>
           {title} ({release_date})
         </h2>
@@ -57,11 +57,11 @@ export const MovieDetails = () => {
         <h3>Genres</h3>
         {/* <p>{genreNames}</p> */}
 
-        {/* {genres.map(genre => (
+        {genres.map(genre => (
           <span key={genre.id} style={{ marginRight: '10px' }}>
             {genre.name}
           </span>
-        ))} */}
+        ))}
       </div>
       <div>
         <h3>Additional name</h3>
