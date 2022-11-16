@@ -33,8 +33,7 @@ const MovieDetails = () => {
       <div>
         <h2>
           {/* {title} ({releaseDate}) */}
-          {/* {title} ({release_date.slice(0, 4)}) */}
-          {title} ({release_date})
+          {title} ({release_date.slice(0, 4)}){/* {title} ({release_date}) */}
         </h2>
         <p>User Score: {vote_average * 10}%</p>
         <h3>Overview</h3>
@@ -42,11 +41,11 @@ const MovieDetails = () => {
         <h3>Genres</h3>
         {/* <p>{genresList}</p> */}
 
-        {/* {genres.map(genre => (
+        {movie.genres.map(genre => (
           <span key={movie.genre.id} style={{ marginRight: '10px' }}>
             {movie.genre.name}
           </span>
-        ))} */}
+        ))}
       </div>
       <div>
         <h3>Additional name</h3>
