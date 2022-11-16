@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { SearchBox } from '../components/SearchBox';
 import { fetchMoviesByName } from '../api';
 
-export const Movies = ({ query }) => {
+const Movies = ({ query }) => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const movieName = searchParams.get('query') ?? '';
@@ -43,6 +43,8 @@ export const Movies = ({ query }) => {
     </main>
   );
 };
+
+export default Movies;
 
 // import { useSearchParams } from 'react-router-dom';
 // import { ProductList } from '../components/ProductList';

@@ -1,12 +1,12 @@
 import { useParams, useLocation } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Suspense } from 'react';
 import { BackLink } from 'components/BackLink';
 import { fetchMovieById } from 'api';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movie, setMovie] = useState({});
-  // const [genreNames, setGenreNames] = useState([]);
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -22,23 +22,10 @@ export const MovieDetails = () => {
   const { title, poster_path, release_date, vote_average, overview, genres } =
     movie;
   const strPoster = 'https://image.tmdb.org/t/p/w300';
-  // setGenreNames(genres);
-  // console.log('genres, ', genres);
 
-  //       const onGenreNames = genres =>
-  //       {
-  //         genres.map(genre => (
-  //           <span key={genre.id} style={{ marginRight: '10px' }}>
-  //             {genre.name}
-  //           </span>
-  //         ));
-  // };
+  // const genresList = genres.map(genre => genre.name).join(', ');
 
-  // for (genre of movie.genres) {
-  //   const genreName = Object.values(genre.name);
-  // }
-
-  // console.log('genreName, ', genreName);
+  // const releaseDate = release_date.slice(0, 4);
 
   return (
     <main style={{ marginLeft: '30px' }}>
@@ -46,22 +33,21 @@ export const MovieDetails = () => {
       <img src={strPoster + poster_path} alt={title} />
       <div>
         <h2>
-          {movie.title} ({movie.release_date.slice(0, 4)})
-        </h2>
-        <h2>
+          {/* {title} ({releaseDate}) */}
+          {/* {title} ({release_date.slice(0, 4)}) */}
           {title} ({release_date})
         </h2>
         <p>User Score: {vote_average * 10}%</p>
         <h3>Overview</h3>
         <p>{overview}</p>
         <h3>Genres</h3>
-        {/* <p>{genreNames}</p> */}
+        {/* <p>{genresList}</p> */}
 
-        {genres.map(genre => (
+        {/* {genres.map(genre => (
           <span key={genre.id} style={{ marginRight: '10px' }}>
             {genre.name}
           </span>
-        ))}
+        ))} */}
       </div>
       <div>
         <h3>Additional name</h3>
@@ -77,11 +63,15 @@ export const MovieDetails = () => {
             </Link>
           </li>
         </ul>
-        <Outlet />
+        <Suspense fallback={<div>Loading subpage...</div>}>
+          <Outlet />
+        </Suspense>
       </div>
     </main>
   );
 };
+
+export default MovieDetails;
 
 // export const MovieDetails = ({ getMovieById }) => {
 //   console.log('Run MovieDetails... ');

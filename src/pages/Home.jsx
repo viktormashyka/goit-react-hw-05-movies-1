@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { fetchMoviesTrendingToday } from 'api';
 
-export const Home = () => {
+const Home = () => {
   const [movies, setMovies] = useState([]);
   const location = useLocation();
 
@@ -48,6 +48,8 @@ export const Home = () => {
     </main>
   );
 };
+
+export default Home;
 
 // import { Link, useLocation } from 'react-router-dom';
 // import { Container, CardWrapper, ProductName } from './ProductList.styled';
