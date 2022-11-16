@@ -19,11 +19,10 @@ const MovieDetails = () => {
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
-  const { title, poster_path, release_date, vote_average, overview, genres } =
-    movie;
+  const { title, poster_path, release_date, vote_average, overview } = movie;
   const strPoster = 'https://image.tmdb.org/t/p/w300';
 
-  // const genresList = genres.map(genre => genre.name).join(', ');
+  // const genresList = movie.genres.map(genre => genre.name).join(', ');
 
   // const releaseDate = release_date.slice(0, 4);
 
@@ -44,8 +43,8 @@ const MovieDetails = () => {
         {/* <p>{genresList}</p> */}
 
         {/* {genres.map(genre => (
-          <span key={genre.id} style={{ marginRight: '10px' }}>
-            {genre.name}
+          <span key={movie.genre.id} style={{ marginRight: '10px' }}>
+            {movie.genre.name}
           </span>
         ))} */}
       </div>

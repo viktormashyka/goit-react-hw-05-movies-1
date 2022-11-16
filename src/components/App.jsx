@@ -1,6 +1,5 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
-import styled from 'styled-components';
 import { SharedLayout } from './SharedLayout';
 
 const Home = lazy(() => import('../pages/Home'));
@@ -16,14 +15,6 @@ const Cast = lazy(() => import('./Cast'));
 // import { Cast } from './Cast';
 
 // import NotFound from 'path/to/pages/NotFound';
-
-// const StyledLink = styled(NavLink)`
-//   color: black;
-
-//   &.active {
-//     color: orange;
-//   }
-// `;
 
 export const App = () => {
   return (
