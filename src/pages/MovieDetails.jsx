@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Suspense } from 'react';
 import { BackLink } from 'components/BackLink';
 import { fetchMovieById } from 'api';
+import MovieCard from 'components/MovieCard';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState({});
@@ -19,33 +20,30 @@ const MovieDetails = () => {
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
-  const { title, poster_path, release_date, vote_average, overview } = movie;
+  const { title, poster_path, vote_average, overview } = movie;
   const strPoster = 'https://image.tmdb.org/t/p/w300';
 
   // const genresList = movie.genres.map(genre => genre.name).join(', ');
-
-  // const releaseDate = release_date.slice(0, 4);
+  {
+    /* {movie.genres.map(genre => (
+          <span key={movie.genre.id} style={{ marginRight: '10px' }}>
+            {movie.genre.name}
+          </span>
+        ))} */
+  }
 
   return (
     <main style={{ marginLeft: '30px' }}>
       <BackLink to={backLinkHref}>Back to movies</BackLink>
       <img src={strPoster + poster_path} alt={title} />
       <div>
-        <h2>
-          {/* {title} ({releaseDate}) */}
-          {title} ({release_date.slice(0, 4)}){/* {title} ({release_date}) */}
-        </h2>
+        <h2></h2>
         <p>User Score: {vote_average * 10}%</p>
         <h3>Overview</h3>
         <p>{overview}</p>
         <h3>Genres</h3>
         {/* <p>{genresList}</p> */}
-
-        {movie.genres.map(genre => (
-          <span key={movie.genre.id} style={{ marginRight: '10px' }}>
-            {movie.genre.name}
-          </span>
-        ))}
+        <MovieCard data={movie} />
       </div>
       <div>
         <h3>Additional name</h3>
