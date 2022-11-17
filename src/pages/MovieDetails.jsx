@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Suspense } from 'react';
 import { BackLink } from 'components/BackLink';
 import { fetchMovieById } from 'api';
-import MovieCard from 'components/MovieCard';
+// import MovieCard from 'components/MovieCard';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState({});
