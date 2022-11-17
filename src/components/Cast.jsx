@@ -38,19 +38,3 @@ const Cast = () => {
 };
 
 export default Cast;
-
-// return (
-//   <section>
-//     <div>
-//       <ul>
-//         {cast.map(c => (
-//           <li key={c.id}>
-//             <img src={strPoster + c.profile_path} alt={c.name} />
-//             <p>{c.name}</p>
-//             <p>Character: {c.character}</p>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   </section>
-// );

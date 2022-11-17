@@ -30,7 +30,6 @@ const Movies = ({ query }) => {
     <main style={{ marginLeft: '30px' }}>
       <SearchBox />
       {/* <SearchBox value={movieName} onChange={updateQueryString} /> */}
-      {/* <SearchBox onSubmit={values => console.log(values)} /> */}
       <ul>
         {movies.map(({ id, title }) => (
           <li key={id}>

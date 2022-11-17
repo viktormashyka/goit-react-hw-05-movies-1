@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { Suspense } from 'react';
 import { BackLink } from 'components/BackLink';
 import { fetchMovieById } from 'api';
-// import MovieCard from 'components/MovieCard';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -33,12 +32,6 @@ const MovieDetails = () => {
   const genresList = genres.map(({ name }) => name).join(', ');
   // const genresList = genres.map(genre => genre.name).join(', ');
 
-  /* {movie.genres.map(genre => (
-          <span key={movie.genre.id} style={{ marginRight: '10px' }}>
-            {movie.genre.name}
-          </span>
-        ))} */
-
   return (
     <main style={{ marginLeft: '30px' }}>
       <BackLink to={backLinkHref}>Go back</BackLink>
@@ -52,7 +45,6 @@ const MovieDetails = () => {
         <p>{overview}</p>
         <h3>Genres</h3>
         <p>{genresList}</p>
-        {/* <MovieCard movie={movie} /> */}
       </div>
       <div>
         <h3>Additional information</h3>
@@ -77,47 +69,3 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
-
-// export const MovieDetails = ({ getMovieById }) => {
-//   console.log('Run MovieDetails... ');
-//   //   const getMovieById = movieId => {
-//   //     return movies.find(movie => movie.id === movieId);
-//   //   };
-//   const { id } = useParams();
-//   const movie = getMovieById(id);
-
-//   const location = useLocation();
-//   const backLinkHref = location.state?.from ?? '/movies';
-
-//   console.log('movie, ', movie);
-
-//   return (
-//     <main>
-//       <BackLink to={backLinkHref}>Back to movies</BackLink>
-//       <img src={movie.poster_path} alt={movie.title} />
-//       <div>
-//         {/* Product - {product.name} - {id} */}
-//         <h2>
-//           {movie.title} - {id}
-//         </h2>
-//         <p>Score</p>
-//         <h3>Overview</h3>
-//         <p>{movie.overview}</p>
-//         <h3>Genres</h3>
-//         <p>genres</p>
-//       </div>
-//       <div>
-//         <h3>Additional name</h3>
-//         <ul>
-//           <li>
-//             <Link to="cast">Cast</Link>
-//           </li>
-//           <li>
-//             <Link to="reviews">Reviews</Link>
-//           </li>
-//         </ul>
-//         <Outlet />
-//       </div>
-//     </main>
-//   );
-// };
