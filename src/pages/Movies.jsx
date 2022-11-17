@@ -7,7 +7,7 @@ import { fetchMoviesByName } from '../api';
 
 const Movies = ({ query }) => {
   const [movies, setMovies] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const movieName = searchParams.get('query') ?? '';
   const location = useLocation();
 
@@ -31,7 +31,6 @@ const Movies = ({ query }) => {
       <SearchBox />
       {/* <SearchBox value={movieName} onChange={updateQueryString} /> */}
       {/* <SearchBox onSubmit={values => console.log(values)} /> */}
-      <h1>Movies by name:</h1>
       <ul>
         {movies.map(({ id, title }) => (
           <li key={id}>

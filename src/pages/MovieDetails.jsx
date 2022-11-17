@@ -24,26 +24,25 @@ const MovieDetails = () => {
   const strPoster = 'https://image.tmdb.org/t/p/w300';
 
   // const genresList = movie.genres.map(genre => genre.name).join(', ');
-  {
-    /* {movie.genres.map(genre => (
+
+  /* {movie.genres.map(genre => (
           <span key={movie.genre.id} style={{ marginRight: '10px' }}>
             {movie.genre.name}
           </span>
         ))} */
-  }
 
   return (
     <main style={{ marginLeft: '30px' }}>
       <BackLink to={backLinkHref}>Go back</BackLink>
       <img src={strPoster + poster_path} alt={title} />
       <div>
-        <h2></h2>
+        <h2>{title}</h2>
         <p>User Score: {vote_average * 10}%</p>
         <h3>Overview</h3>
         <p>{overview}</p>
         <h3>Genres</h3>
         {/* <p>{genresList}</p> */}
-        {/* <MovieCard data={movie} /> */}
+        <MovieCard data={movie} />
       </div>
       <div>
         <h3>Additional information</h3>
