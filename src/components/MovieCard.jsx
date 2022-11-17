@@ -1,5 +1,5 @@
-const MovieCard = ({ data }) => {
-  const { genres, title, release_date } = data;
+const MovieCard = ({ movie }) => {
+  const { genres, title, release_date } = movie;
   const genresList = genres.map(({ name }) => name).join(', ');
 
   const year1 = new Date(release_date).getFullYear();

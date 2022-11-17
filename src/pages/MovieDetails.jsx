@@ -20,10 +20,17 @@ const MovieDetails = () => {
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
-  const { title, poster_path, vote_average, overview } = movie;
+  const { title, poster_path, vote_average, overview, release_date, genres } =
+    movie;
+
   const strPoster = 'https://image.tmdb.org/t/p/w300';
 
-  // const genresList = movie.genres.map(genre => genre.name).join(', ');
+  const year1 = new Date(release_date).getFullYear();
+  // const year2 = release_date.split('-')[0];
+  // const year3 = release_date.slice(0, 4);
+
+  const genresList = genres.map(({ name }) => name).join(', ');
+  // const genresList = genres.map(genre => genre.name).join(', ');
 
   /* {movie.genres.map(genre => (
           <span key={movie.genre.id} style={{ marginRight: '10px' }}>
@@ -36,13 +43,15 @@ const MovieDetails = () => {
       <BackLink to={backLinkHref}>Go back</BackLink>
       <img src={strPoster + poster_path} alt={title} />
       <div>
-        <h2>{title}</h2>
+        <h2>
+          {title} ({year1})
+        </h2>
         <p>User Score: {vote_average * 10}%</p>
         <h3>Overview</h3>
         <p>{overview}</p>
         <h3>Genres</h3>
-        {/* <p>{genresList}</p> */}
-        <MovieCard data={movie} />
+        <p>{genresList}</p>
+        {/* <MovieCard movie={movie} /> */}
       </div>
       <div>
         <h3>Additional information</h3>
