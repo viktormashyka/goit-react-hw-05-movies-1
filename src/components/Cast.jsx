@@ -19,19 +19,38 @@ const Cast = () => {
   return (
     <section>
       <div>
-        <h2>Cast</h2>
-        <ul>
-          {cast.map(c => (
-            <li key={c.id}>
-              <img src={strPoster + c.profile_path} alt={c.name} />
-              <p>{c.name}</p>
-              <p>Character: {c.character}</p>
-            </li>
-          ))}
-        </ul>
+        {cast.length > 0 ? (
+          <ul>
+            {cast.map(c => (
+              <li key={c.id}>
+                <img src={strPoster + c.profile_path} alt={c.name} />
+                <p>{c.name}</p>
+                <p>Character: {c.character}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>We don't have information about movie cast.</p>
+        )}
       </div>
     </section>
   );
 };
 
 export default Cast;
+
+// return (
+//   <section>
+//     <div>
+//       <ul>
+//         {cast.map(c => (
+//           <li key={c.id}>
+//             <img src={strPoster + c.profile_path} alt={c.name} />
+//             <p>{c.name}</p>
+//             <p>Character: {c.character}</p>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   </section>
+// );

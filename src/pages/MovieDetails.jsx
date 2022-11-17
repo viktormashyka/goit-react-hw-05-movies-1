@@ -34,7 +34,7 @@ const MovieDetails = () => {
 
   return (
     <main style={{ marginLeft: '30px' }}>
-      <BackLink to={backLinkHref}>Back to movies</BackLink>
+      <BackLink to={backLinkHref}>Go back</BackLink>
       <img src={strPoster + poster_path} alt={title} />
       <div>
         <h2></h2>
@@ -43,10 +43,10 @@ const MovieDetails = () => {
         <p>{overview}</p>
         <h3>Genres</h3>
         {/* <p>{genresList}</p> */}
-        <MovieCard data={movie} />
+        {/* <MovieCard data={movie} /> */}
       </div>
       <div>
-        <h3>Additional name</h3>
+        <h3>Additional information</h3>
         <ul>
           <li>
             <Link to="cast" state={{ from: location.state?.from ?? '/' }}>

@@ -1,17 +1,50 @@
+import { useSearchParams } from 'react-router-dom';
 import { Wrapper, Input, Icon } from './SearchBox.styled';
 
 export const SearchBox = ({ value, onChange }) => {
+  const [, setSearchParams] = useSearchParams();
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const value = e.target.searchQuery.value;
+    const query = value.trim();
+
+    if (!query) {
+      alert('empty query');
+      return;
+    }
+    setSearchParams({ query });
+  };
   return (
     <Wrapper>
-      <Icon />
-      <Input
-        type="text"
-        value={value}
-        onChange={e => onChange(e.target.value)}
-      />
+      <form onSubmit={handleSubmit}>
+        <Icon />
+        <Input
+          name="searchQuery"
+          type="text"
+          // value={value}
+          onChange={e => onChange(e.target.value)}
+        />
+      </form>
     </Wrapper>
   );
 };
+
+// import { Wrapper, Input, Icon } from './SearchBox.styled';
+
+// export const SearchBox = ({ value, onChange }) => {
+
+//   return (
+//     <Wrapper>
+//       <Icon />
+//       <Input
+//         type="text"
+//         value={value}
+//         onChange={e => onChange(e.target.value)}
+//       />
+//     </Wrapper>
+//   );
+// };
 
 // export const SearchBox = ({ value, onSubmit }) => {
 //   // const [inputValues, setInputValues] = useState({ name: '' });
@@ -58,8 +91,6 @@ export const SearchBox = ({ value, onChange }) => {
 //     </form>
 //   );
 // };
-
-
 
 // export const Searchbar = ({ onSubmit }) => {
 //   const [searchPhotos, setSearchPhotos] = useState('');

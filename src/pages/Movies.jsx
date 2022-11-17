@@ -28,8 +28,9 @@ const Movies = ({ query }) => {
 
   return (
     <main style={{ marginLeft: '30px' }}>
-      <SearchBox value={movieName} onChange={updateQueryString} />
-      {/* <SearchBox value={movieName} onSubmit={values => console.log(values)} /> */}
+      {/* <SearchBox value={movieName} onChange={updateQueryString} /> */}
+      {/* <SearchBox /> */}
+      <SearchBox onSubmit={values => console.log(values)} />
       <h1>Movies by name:</h1>
       <ul>
         {movies.map(({ id, title }) => (
