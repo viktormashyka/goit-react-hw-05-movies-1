@@ -20,7 +20,7 @@ const MovieDetails = () => {
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
-  if (!movie) return;
+  if (!movie) return <p>loading...</p>;
 
   const { title, poster_path, vote_average, overview, release_date, genres } =
     movie;
