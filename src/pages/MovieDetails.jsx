@@ -7,7 +7,7 @@ import { fetchMovieById } from 'api';
 // import MovieCard from 'components/MovieCard';
 
 const MovieDetails = () => {
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -20,6 +20,8 @@ const MovieDetails = () => {
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
+  if (!movie) return;
+
   const { title, poster_path, vote_average, overview, release_date, genres } =
     movie;
 
@@ -28,7 +30,6 @@ const MovieDetails = () => {
   const year1 = new Date(release_date).getFullYear();
   // const year2 = release_date.split('-')[0];
   // const year3 = release_date.slice(0, 4);
-
   const genresList = genres.map(({ name }) => name).join(', ');
   // const genresList = genres.map(genre => genre.name).join(', ');
 
