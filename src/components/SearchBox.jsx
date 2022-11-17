@@ -23,7 +23,7 @@ export const SearchBox = ({ value, onChange }) => {
           name="searchQuery"
           type="text"
           // value={value}
-          onChange={e => onChange(e.target.value)}
+          // onChange={e => onChange(e.target.value)}
         />
       </form>
     </Wrapper>

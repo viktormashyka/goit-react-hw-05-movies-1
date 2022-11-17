@@ -11,11 +11,11 @@ const Movies = ({ query }) => {
   const movieName = searchParams.get('query') ?? '';
   const location = useLocation();
 
-  const updateQueryString = query => {
-    const nextParams = query !== '' ? { query } : {};
-    setSearchParams(nextParams);
-  };
-  console.log('query: movieName, ', { query: movieName });
+  // const updateQueryString = query => {
+  //   const nextParams = query !== '' ? { query } : {};
+  //   setSearchParams(nextParams);
+  // };
+  // console.log('query: movieName, ', { query: movieName });
 
   useEffect(() => {
     if (!movieName) return;
@@ -28,9 +28,9 @@ const Movies = ({ query }) => {
 
   return (
     <main style={{ marginLeft: '30px' }}>
+      <SearchBox />
       {/* <SearchBox value={movieName} onChange={updateQueryString} /> */}
-      {/* <SearchBox /> */}
-      <SearchBox onSubmit={values => console.log(values)} />
+      {/* <SearchBox onSubmit={values => console.log(values)} /> */}
       <h1>Movies by name:</h1>
       <ul>
         {movies.map(({ id, title }) => (
