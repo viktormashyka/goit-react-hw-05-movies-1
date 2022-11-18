@@ -67,11 +67,31 @@ export const fetchMovieById = async ({ movieId }) => {
     const response = await axios.get(url);
     console.log('fetchMoviesById response.data, ', response.data);
     // const movie = getNormalizedMovies(response.data.results);
-    const movie = response.data;
+    // const movie = response.data;
+    const movie = normalizeMovieDetailsData(response.data);
     return movie;
   } catch (error) {
     throw new Error(error);
   }
+};
+
+const normalizeMovieDetailsData = data => {
+  const { title, poster_path, vote_average, overview, release_date, genres } =
+    data;
+
+  const posterUrl = 'https://image.tmdb.org/t/p/w300' + poster_path;
+  const year = new Date(release_date).getFullYear();
+  const userScore = Number.parseInt(vote_average * 10);
+  const genresList = genres.map(({ name }) => name).join(', ');
+
+  return {
+    title,
+    overview,
+    posterUrl,
+    year,
+    userScore,
+    genresList,
+  };
 };
 
 export const fetchMovieByIdCast = async ({ movieId }) => {
